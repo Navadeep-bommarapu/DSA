@@ -1,5 +1,5 @@
 from math import *
-n = int(input("Enter a number:"))
+# n = int(input("Enter a number:"))
 
 
 def count_digits(n):
@@ -34,7 +34,7 @@ def is_palindrome(n):
         n //= 10
     return rem == dup
 
-result = is_palindrome(n)
+# result = is_palindrome(n)
 # print(result)
 
 def armstrong_num(n):
@@ -71,4 +71,50 @@ def divisors(n):
     for i in mylist:
         print(i, end=" ")
 
-divisors(n)
+# divisors(n)
+
+def prime_number(n):
+    # if n < 0:
+    #     return False
+    # count = 0
+    # for i in range(1, n+1): # Time complexity is O(n)
+    #     if n % i == 0:
+    #         count += 1
+    # return count == 2
+    
+    count = 0
+    for i in range(1, int(sqrt(n)+1)): # Time complexity is O(sqrt(n))
+        if n % i == 0:
+            count += 1;
+            if n // i != i:
+                count += 1
+    return count == 2
+
+# result = prime_number(n)
+# print(result)
+
+# print(sqrt(n))
+# print(int(sqrt(n) + 1))
+
+def gcd(num1, num2):
+    # for num in range(1, min(num1, num2)+1):
+    #     if num1 % num == 0 and num2 % num == 0:
+    #         gcd = num
+
+    # Euclidean algorithm 
+    # gcd(a, b) = gcd(a - b, b) if a > b
+    # gcd(a, b) = gcd(a % b, b) if a >b
+    while num1 > 0 and num2 > 0:
+        if num1 > num2:
+            num1 = num1 % num2
+        else:
+            num2 = num2 % num1
+    if num1 == 0:
+        gcd = num2
+    else:        
+        gcd = num1
+
+    return gcd
+
+result = gcd(10,52)
+print(result)
