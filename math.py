@@ -118,3 +118,18 @@ def gcd(num1, num2):
 
 result = gcd(10,52)
 print(result)
+
+def printIncreasingPower(x):
+    # for i in range(1,x+1):
+    #     if i**2 > x:
+    #         return
+    #     print(i**2)
+    
+    i = 1
+    while i < x:
+        if i**2 > x:
+            return
+        print(i**2)
+        i += 1
+        
+printIncreasingPower(n)
