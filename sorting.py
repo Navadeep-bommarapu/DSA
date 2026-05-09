@@ -1,6 +1,6 @@
 # Selection Sort - Sorting elements based on the minimum element in the array
 
-arr = list(map(int, input("Enter array elements: ").split())) or [3,1,2,4,1,5,2,6,4]
+arr = list(map(int, input("Enter array elements: ").split())) or [0,1,2,3,4,24]
 
 # Selection Sort - initializing the first element in the array and comparing to the other elements 
 #                   and swapping with the minimum element in the array
@@ -173,7 +173,39 @@ def merge_sort(arr, low, high):
 
 
 
+# Finding the missing number from the length of nums
+# [0, 2, 1, 3, 4] ouput: 5 is missing from the array range [0, 5]
+def missingNumber(nums):
+    
+    # Brute Force
+    # for i in range(len(nums)):
+    #     for j in range(i):
+    #         if nums[j] > nums[i]:
+    #             temp = nums[i]
+    #             nums[i] = nums[j]
+    #             nums[j] = temp
+                
+    # print(nums)
 
+    # for i in range(len(nums)):
+    #     n = len(nums)
+    #     if (i not in nums):
+    #         return i
+    #     elif (n not in nums):
+    #         return n
+    #     else:
+    #         continue
+        
+    # Basic Math
+    # Total summation of the expected array of range [0,n] would be n * (n+1) // 2
+    # The array with the missing number will have the lesser value
+    # By subtracting the expected sum and actual sum we get the answer
+    
+    n = len(nums)
+    expected = n * (n+1) // 2
+    return expected - sum(nums)
+        
+print(missingNumber(arr))
 
 
 
