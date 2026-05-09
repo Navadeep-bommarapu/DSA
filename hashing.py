@@ -77,3 +77,37 @@ def twoSum(nums, target):
 
 # print(twoSum(nums, target))
 
+
+# Finding the Highest and the Lowest frequency element in an array
+arr = [10,5,10,15,10,5]
+
+def highesh_lowest_frequency_elements(arr):
+    hash_map = {}
+    
+    for i in arr:
+        hash_map[i] = hash_map.get(i, 0) + 1
+        
+    highest = 0
+    lowest = len(arr)
+    print(hash_map.items())
+    
+    # for i in hash_map:
+    #     print(f"{i} -> {hash_map[i]}")
+    #     if hash_map[i] > highest:
+    #         highest = i
+    #     if hash_map[i] < lowest:
+    #         lowest = i
+            
+    for element, count in hash_map.items():
+        print(f'{element} -> {count}')
+        if highest < count:
+            highest = element
+        if lowest > count:
+            lowest = element
+        
+    return highest, lowest
+    
+        
+print(highesh_lowest_frequency_elements(arr))
+
+
