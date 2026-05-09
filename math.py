@@ -1,5 +1,5 @@
 from math import *
-# n = int(input("Enter a number:"))
+n = int(input("Enter a number:"))
 
 
 def count_digits(n):
