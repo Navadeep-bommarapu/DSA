@@ -1,5 +1,5 @@
 from math import *
-n = int(input("Enter a number:"))
+# n = (int(input("Enter a number:"))) 
 
 
 def count_digits(n):
@@ -116,8 +116,8 @@ def gcd(num1, num2):
 
     return gcd
 
-result = gcd(10,52)
-print(result)
+# result = gcd(10,52)
+# print(result)
 
 def printIncreasingPower(x):
     # for i in range(1,x+1):
@@ -132,4 +132,40 @@ def printIncreasingPower(x):
         print(i**2)
         i += 1
         
-printIncreasingPower(n)
+# printIncreasingPower(n)
+
+# Finding the missing number from the length of nums
+# [0, 2, 1, 3, 4] ouput: 5 is missing from the array range [0, 5]
+
+arr = [0, 2, 1, 3, 4]
+def missingNumber(nums):
+    
+    # Brute Force
+    # for i in range(len(nums)):
+    #     for j in range(i):
+    #         if nums[j] > nums[i]:
+    #             temp = nums[i]
+    #             nums[i] = nums[j]
+    #             nums[j] = temp
+                
+    # print(nums)
+
+    # for i in range(len(nums)):
+    #     n = len(nums)
+    #     if (i not in nums):
+    #         return i
+    #     elif (n not in nums):
+    #         return n
+    #     else:
+    #         continue
+        
+    # Basic Math
+    # Total summation of the expected array of range [0,n] would be n * (n+1) // 2
+    # The array with the missing number will have the lesser value
+    # By subtracting the expected sum and actual sum we get the answer
+    
+    n = len(nums)
+    expected = n * (n+1) // 2
+    return expected - sum(nums)
+        
+print(missingNumber(arr))
