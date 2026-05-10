@@ -1,6 +1,6 @@
 # Selection Sort - Sorting elements based on the minimum element in the array
 
-arr = list(map(int, input("Enter array elements: ").split())) or [0,1,2,3,4,24]
+arr = list(map(int, input("Enter array elements: ").split())) or [4,22,4,62,1,3,6,9]
 
 # Selection Sort - initializing the first element in the array and comparing to the other elements 
 #                   and swapping with the minimum element in the array
@@ -158,16 +158,33 @@ def merge_sort(arr, low, high):
 # print(arr)
 # print(merge_sort(arr, low, high))
 
-# Quick Sort
-# def quick_sort(arr):
-    
-    
-    
-    
-    
-#     return arr
+# Quick Sort - Sorting Arrays using pivot
 
-# print(quick_sort(arr))
+def find_partition_index(arr, low, high):
+    pivot = arr[high]
+    i = low - 1
+    
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            i += 1
+            
+            arr[i], arr[j] = arr[j], arr[i]
+            
+    arr[i+1], arr[high] = arr[high], arr[i+1]
+    print(i+1)
+    return i + 1
+
+def quick_sort(arr, low, high):
+    if low < high:
+        partition = find_partition_index(arr, low, high)
+        
+        quick_sort(arr, low, partition - 1)
+        quick_sort(arr, partition + 1, high)
+        
+
+        
+print(quick_sort(arr, low, high))
+print(arr)
 
 
 
@@ -205,7 +222,25 @@ def missingNumber(nums):
     expected = n * (n+1) // 2
     return expected - sum(nums)
         
-print(missingNumber(arr))
+# print(missingNumber(arr))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
