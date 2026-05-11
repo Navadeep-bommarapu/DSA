@@ -160,69 +160,50 @@ def merge_sort(arr, low, high):
 
 # Quick Sort - Sorting Arrays using pivot
 
-def find_partition_index(arr, low, high):
-    pivot = arr[high]
-    i = low - 1
+def partition(arr, low, high):
+    pivot = arr[low]
+    i = low
+    j = high
+    print("Pivot:",pivot)
+    print("i:",i,"j:",j)
     
-    for j in range(low, high):
-        if arr[j] <= pivot:
+    while i < j:
+        print(arr)
+        # while i <= high and arr[i] <= pivot:
+        #     i += 1
+        
+        # while j >= low and arr[j] > pivot:
+        #     j -= 1
+        
+        while arr[i] <= pivot and i <= high - 1:
             i += 1
-            
+        
+        while arr[j] > pivot and j >= low + 1:
+            j -= 1
+        
+        print("i:",i,"j:", j,"\n")
+        if i < j:
             arr[i], arr[j] = arr[j], arr[i]
-            
-    arr[i+1], arr[high] = arr[high], arr[i+1]
-    print(i+1)
-    return i + 1
+        
+    arr[low], arr[j] = arr[j], arr[low]
+    
+    return j
 
 def quick_sort(arr, low, high):
     if low < high:
-        partition = find_partition_index(arr, low, high)
+        partition_index = partition(arr,low,high)
+        print("Partition index:",partition_index)
         
-        quick_sort(arr, low, partition - 1)
-        quick_sort(arr, partition + 1, high)
-        
-
-        
+        quick_sort(arr, low, partition_index - 1)
+        quick_sort(arr, partition_index + 1, high)
+    
+    return arr
+    
 print(quick_sort(arr, low, high))
-print(arr)
 
 
 
 
-
-# Finding the missing number from the length of nums
-# [0, 2, 1, 3, 4] ouput: 5 is missing from the array range [0, 5]
-def missingNumber(nums):
-    
-    # Brute Force
-    # for i in range(len(nums)):
-    #     for j in range(i):
-    #         if nums[j] > nums[i]:
-    #             temp = nums[i]
-    #             nums[i] = nums[j]
-    #             nums[j] = temp
-                
-    # print(nums)
-
-    # for i in range(len(nums)):
-    #     n = len(nums)
-    #     if (i not in nums):
-    #         return i
-    #     elif (n not in nums):
-    #         return n
-    #     else:
-    #         continue
-        
-    # Basic Math
-    # Total summation of the expected array of range [0,n] would be n * (n+1) // 2
-    # The array with the missing number will have the lesser value
-    # By subtracting the expected sum and actual sum we get the answer
-    
-    n = len(nums)
-    expected = n * (n+1) // 2
-    return expected - sum(nums)
-        
-# print(missingNumber(arr))
 
 
 
@@ -335,3 +316,32 @@ def missingNumber(nums):
 
 
 # print(merge_sort_practice(arr,low,high))
+
+# def partition_practice(arr, low, high):
+#     pivot = arr[low]
+#     i = low
+#     j = high
+    
+#     while i < j:
+#         while i <= high and arr[i] <= pivot:
+#             i += 1
+        
+#         while j >= low and arr[j] > pivot:
+#             j -= 1
+            
+#         if i < j:
+#             arr[i], arr[j] = arr[j], arr[i]
+        
+#     arr[low], arr[j] = arr[j], arr[low]
+#     return j
+        
+
+# def quick_sort_practice(arr, low, high):
+#     if low < high:
+#         partition_index = partition_practice(arr, low, high)
+#         quick_sort_practice(arr, low, partition_index-1)
+#         quick_sort_practice(arr, partition_index + 1, high)
+        
+#         return arr
+
+# print(quick_sort_practice(arr, low, high))
