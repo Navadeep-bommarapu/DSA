@@ -159,6 +159,7 @@ def merge_sort(arr, low, high):
 # print(merge_sort(arr, low, high))
 
 # Quick Sort - Sorting Arrays using pivot
+# Divide and Conquer Algorithm
 
 def partition(arr, low, high):
     pivot = arr[low]
