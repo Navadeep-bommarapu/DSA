@@ -108,6 +108,23 @@ def highesh_lowest_frequency_elements(arr):
     return highest, lowest
     
         
-print(highesh_lowest_frequency_elements(arr))
+# print(highesh_lowest_frequency_elements(arr))
 
+# Contains Duplicates - check if the duplicates index distance <= k
+# [1,0,1,1] --> {1: 0, 0: 1, 1: 2, 1: 3}
+def containsNearbyDuplicate(nums, k):
+    seen = {}
+    
+    for i in range(len(nums)):
+        
+        if nums[i] in seen and i - seen[nums[i]] <= k: # (0,2), (0,3), (2,3) duplicates at this index, 
+#                                                      checking the index distance 
+#                                                      2-0 <= 2 x 
+#                                                      3-0 <= 2 x 
+#                                                      3-2 <= k (correct)
+            return True
+        
+        seen[nums[i]] = i
+    return False
 
+print(containsNearbyDuplicate([1,0,1,1],2))
