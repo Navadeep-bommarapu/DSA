@@ -291,7 +291,7 @@ def union_of_sorted_arrs(arr1, arr2):
             
 # print(union_of_sorted_arrs(arr1, arr2))
 
-# Optimal Approach - 
+# Optimal Approach 
 def optimal_union_of_sorted_arrs(arr1, arr2):
     temp = []
     
@@ -378,7 +378,8 @@ def firstMissingPositive(nums):
     
     # return maximum + 1
     
-    # Optimal Approach
+    # Optimal Approach - creating a set of arr elements and looping through the set and 
+    #                    checking if the elment not in the set then return the element
     s = set(nums)
     i = 1
     
@@ -417,13 +418,29 @@ def findDuplicate(nums):
 def finding_missing_number(arr, n):
             
     for i in range(1,n+1):
+        flag = 0
+        for j in range(n):
+            if arr[j] == i:
+                flag = 1
+                break
+        if flag == 0:
+            return i
+        
+
+n = len(arr)
+# print(finding_missing_number(arr,n))
+
+# Optimal Approach - looping from 1 to n and returning the element if it does not exists in the array
+def optimal_finding_missing_number(arr, n):
+    
+    for i in range(1,n+1):
         if i not in arr:
             return i
     return -1
 
-n = len(arr)
-# print(finding_missing_number(arr,n))
-    
+# print(optimal_finding_missing_number(arr, n))
+
+
 
 
 
