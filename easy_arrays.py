@@ -417,7 +417,7 @@ def findDuplicate(nums):
 # Brute Approach - arr = [1,2,4,5] n = length of arr => 4, find the element missing in the arr within range 1, n
 def finding_missing_number(arr, n):
             
-    for i in range(1,n+1):
+    for i in range(1,n):
         flag = 0
         for j in range(n):
             if arr[j] == i:
@@ -427,41 +427,179 @@ def finding_missing_number(arr, n):
             return i
         
 
-n = len(arr)
+n = max(arr)
 # print(finding_missing_number(arr,n))
+
+# Better Approach - creating a hash arr of size 1 greater than the max element of the arr, 
+#                   iterating through the arr and making the index in hash to be 1 and 
+#                   then again iterating through 1 to n (max element) if the number is 0 then return the number 
+n = max(arr)
+def better_finding_missing_number(arr, n):
+    index = n + 1
+    seen = [0] * index
+    print(seen) 
+    
+    for i in arr:
+        if i not in seen:
+            seen[i] = 1
+    
+    print(seen)
+    
+    # 1,2,5,4,3,6,7,9
+    
+    for i in range(1, n):
+        if seen[i] == 0:
+            return i
+
+# print(better_finding_missing_number(arr,n))
+
 
 # Optimal Approach - looping from 1 to n and returning the element if it does not exists in the array
 def optimal_finding_missing_number(arr, n):
     
-    for i in range(1,n+1):
-        if i not in arr:
-            return i
-    return -1
+    # for i in range(1,n+1):
+    #     if i not in arr:
+    #         return i
+    # return -1
+    
+    # Sum Method
+    # expected = n * (n + 1) // 2
+    # return expected - sum(arr)
+    
+    # XOR Method
+    # Time complexity - O(n + n)
+    # xor1 = 0
+    # for i in range(1,n+1):
+    #     xor1 = xor1 ^ i
+    
+    # xor2 = 0
+    # for i in arr:
+    #     xor2 = xor2 ^ i
+    
+    # return xor1 ^ xor2
+
+    # Time Complexity - O(n)
+    xor1 = 0
+    xor2 = 0
+    for i in range(len(arr)):
+        xor1 = xor1 ^ arr[i]
+        xor2 = xor2 ^ (i + 1)
+    xor2 = xor2 ^ n
+        
+    return xor1 ^ xor2
+
 
 # print(optimal_finding_missing_number(arr, n))
 
+# Consecutive Maximum Ones
+# Brute Approach - 
+# [1,1,0,1,1,1,0,1,1] - there are 3 consecutive ones which is the max
+arr = [1,1,0,1,1,1]
+def max_consecutive_one(arr):
+    count = 0
+    maximum = 0
+    for i in range(len(arr)):
+        if arr[i] == 1:
+            count += 1
+        else:
+            count = 0
+            
+        if maximum < count:
+            maximum = count
+            
+    return maximum
+
+# print(max_consecutive_one(arr))
 
 
+# Finding the number that appears once, and the other twice
+# Brute Approach - count variable and incrementing every time the first pointer value is equal to the second pointer
+arr = [1,1,2,3,5,3,2,4,4]
+def find_number_appears_once_twice(arr):
+    
+    for i in range(len(arr)):
+        num = arr[i]
+        count = 0
+        for j in range(len(arr)):
+            if arr[j] == num:
+                count += 1
+        
+        if count == 1:
+            return num
+            
+# print(find_number_appears_once_twice(arr))
 
+# Better Approach - using hash arr with the max element + 1 size, 
+#                    the has will contain the num of times the element occured in the arr, 
+#                    then checking the hash arr if any one has 1 time then returning the element
+def better_find_number_appears_once_twice(arr):
+    hash = [0] * (max(arr) + 1)
+    
+    for i in arr:
+        hash[i] += 1
+        
+    print(hash)
+    for i in range(len(hash)):
+        if hash[i] == 1:
+            return i
+    
+# print(better_find_number_appears_once_twice(arr))
 
+# Optimal Approach - using xor we can calculate the array elements, 
+#                    the doubles element will become 0 and the singular element will be returned
+def optimal_find_number_appears_once_twice(arr):
+    xor = 0
+    for i in arr:
+        xor = xor ^ i
+    return xor
+    
+# print(optimal_find_number_appears_once_twice(arr))
 
+nums = [1]
+def findMiddleIndex(nums):
+        
+    total = sum(nums)
+    left_sum = 0
+        
+    for i in range(len(nums)):
+        
+        right_sum = total - left_sum - nums[i]
+        
+        if left_sum == right_sum:
+            return i
+    
+        left_sum += nums[i]
+    
+    return -1
+        
+# print(findMiddleIndex(nums))
 
+# Longest Subarray with sum k (positive number)
+# Brute Approach - looping through the arr and taking subarray and 
+#                  finding the sum equal to k within i to j and returning the max length
+arr = [1,2,3,1,1,1,4,2,3]
+def longest_subarray_sum_k(arr, k):
+    length = 0
+    for i in range(len(arr)):
+        sum = 0
+        for j in range(i,len(arr)):
+                
+            sum += arr[j]
+            
+            if sum == k:
+                length = max(j-i+1, length)
+    
+    return length
+        
+print(longest_subarray_sum_k(arr,3))
 
+# def optimal_longest_subarray_sum_k(arr, k):
+    
+    
+    
+#     return arr
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# print(optimal_find_number_appears_once_twice(arr, 3))
 
 
 
