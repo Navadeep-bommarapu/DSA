@@ -577,29 +577,71 @@ def findMiddleIndex(nums):
 # Longest Subarray with sum k (positive number)
 # Brute Approach - looping through the arr and taking subarray and 
 #                  finding the sum equal to k within i to j and returning the max length
-arr = [1,2,3,1,1,1,4,2,3]
+arr = [2,0,0,3]
 def longest_subarray_sum_k(arr, k):
-    length = 0
+    max_length = 0
+    sum = 0
+    hash_map = {}
+    
     for i in range(len(arr)):
-        sum = 0
-        for j in range(i,len(arr)):
-                
-            sum += arr[j]
-            
-            if sum == k:
-                length = max(j-i+1, length)
-    
-    return length
+        sum += arr[i]
         
-print(longest_subarray_sum_k(arr,3))
+        if sum == k:
+            max_length = max(max_length, i+1)
+            
+        rem = sum - k
+        
+        if rem in hash_map:
+            length = i - hash_map[rem]
+            max_length = max(max_length, length)
+            
+        print(hash_map)
+        
+        if rem not in hash_map:
+            hash_map[sum] = i
+    
+    return max_length
+        
+# print(longest_subarray_sum_k(arr,3))
 
-# def optimal_longest_subarray_sum_k(arr, k):
-    
-    
-    
-#     return arr
 
-# print(optimal_find_number_appears_once_twice(arr, 3))
+#Optimal Approach
+arr = [1,1,0,3,3]
+def optimal_longest_subarray_sum_k(arr, k):
+    maxlength = 0
+    i = 0
+    j = 0
+    sum = arr[0]
+    # for j in range(len(arr)):
+    #     sum += arr[j]
+        
+    #     # print(sum, end=" ")
+        
+    #     while sum > k:
+    #         sum -= arr[i]
+    #         i += 1
+            
+    #     if sum == k:
+    #         maxlength = max(maxlength, j-i+1)
+    
+    while j < len(arr):
+        
+        while sum > k and i <= j:
+            sum -= arr[i]
+            i += 1
+            
+        
+        if sum == k:
+            maxlength = max(maxlength, j-i+1)             
+    
+        j += 1
+        
+        if j < len(arr):
+            sum += arr[j]
+    
+    return maxlength
+
+print(optimal_longest_subarray_sum_k(arr, 6))
 
 
 
