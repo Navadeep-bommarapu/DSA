@@ -167,7 +167,7 @@ def majority_element(arr):
     
     return -1
 
-print(majority_element)
+# print(majority_element)
 
 # Better Approach - using Hash Map storing the arr element and number of times it present in the arr, 
 #                   and again iterating through the map and seeing the element count > n//2 or can check the max, 
@@ -192,9 +192,29 @@ def better_majority_element(arr):
             
     return maxelement
         
-print(better_majority_element(arr))
+# print(better_majority_element(arr))
 
 
+# Optimal Approach - Moore's Voting Algorithm
+arr = [7,7,5,7,5,1,5,7,5,5,7,7,5,5,5,5]
+def optimal_majority_element(arr):
+    maj_element = arr[0]
+    count = 0
+    n = len(arr)
+    
+    for i in range(len(arr)):
+        # print(count)
+        if count == 0:
+            count = 1
+            maj_element = arr[i]
+        elif arr[i] == maj_element:
+            count += 1
+        else:
+            count -= 1
+        
+    return maj_element
+
+print(optimal_majority_element(arr))
 
 
 
