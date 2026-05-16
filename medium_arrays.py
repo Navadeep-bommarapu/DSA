@@ -1,4 +1,4 @@
-arr = list(map(int, input("Enter array element: ").split())) or [3,1,-2,-5,2,-4]
+arr = list(map(int, input("Enter array element: ").split())) or [1,2,3]
 
 # Two Sum
 # Brute Approach - looping through the array and checking for the summation to the target number
@@ -413,10 +413,70 @@ def sec_variate_rearrange_element_bysign(arr):
     
     return ans
         
-print(sec_variate_rearrange_element_bysign(arr))
-            
-            
+# print(sec_variate_rearrange_element_bysign(arr))
+
+# Next Permutation
+# Optimal Approach - using the observation and algorithm
+# Observations
+# 1. Keeping the Longest Prefix match, finding the breaking point arr[i] > arr[i+1]
+# 2. find the element greater than arr[i] and smaller elent which will be closer to the element
+# [2 1 | 5 4 3 0 0] -> 1 is the arr[i] and the element should be greater than the 1 
+#                       and smaller one so that it will be closest to 1 which is 3
+# [2 3 | 5 4 1 0 0]
+# 3. Try to place the rest in the sorted arrangement
+# [2 3 | 5 4 1 0 0] -> sorting the rest of the array -> [2 3 0 0 1 4 5]
+def next_permutation(arr):
+    index = -1
+    for i in range(len(arr)-2, -1, -1):
+        if arr[i] < arr[i+1]:
+            index = i
+            break
+        
+        
+    if index == -1:
+        arr.reverse()
+        return arr
+        
+    print("index:",index)
+        
+    for i in range(len(arr)-1, index, -1):
+        if arr[i] > arr[index]:
+            arr[i], arr[index] = arr[index], arr[i]
+            break
     
+        
+    for i in range(index+1, len(arr)):
+        for j in range(i+1, len(arr)):
+            print('i:', i, 'j:', j)
+            if arr[j] < arr[i]:
+                arr[i], arr[j] = arr[j], arr[i]
+        
+    return arr
 
+# print(next_permutation(arr))
+        
+def next_permutation_practice(arr):
+    index = -1
+    for i in range(len(arr)-2, -1, -1):
+        if arr[i] < arr[i+1]:
+            index = i
+            break
+    
+    if index == -1:
+        arr.reverse()
+        return arr
 
+    for i in range(len(arr)-1, index, -1):
+        if arr[i] > arr[index]:
+            arr[i], arr[index] = arr[index], arr[i]
+            break
+    
+    for i in range(index+1, len(arr)):
+        for j in range(i+1):
+            if arr[j] < arr[i]:
+                arr[j], arr[i] = arr[i], arr[j]
+            
+    return arr
+
+print(next_permutation_practice(arr))
 
