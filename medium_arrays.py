@@ -1,4 +1,4 @@
-arr = list(map(int, input("Enter array element: ").split())) or [1,2,3]
+arr = list(map(int, input("Enter array element: ").split())) or [10,22,12,3,0,6]
 
 # Two Sum
 # Brute Approach - looping through the array and checking for the summation to the target number
@@ -447,7 +447,7 @@ def next_permutation(arr):
         
     for i in range(index+1, len(arr)):
         for j in range(i+1, len(arr)):
-            print('i:', i, 'j:', j)
+            # print('i:', i, 'j:', j)
             if arr[j] < arr[i]:
                 arr[i], arr[j] = arr[j], arr[i]
         
@@ -478,5 +478,42 @@ def next_permutation_practice(arr):
             
     return arr
 
-print(next_permutation_practice(arr))
+# print(next_permutation_practice(arr))
 
+# Leader in an Array:
+# Brute Approach - looping through the array and checking if the element is greater 
+#                  than the elements right side of the element
+
+def arr_leader(arr):
+    leaders = []
+    
+    for i in range(len(arr)):
+        count = True
+        for j in range(i+1, len(arr)):
+            
+            if arr[i] < arr[j]:
+                count = False
+                break
+            
+        if count == True:
+            leaders.append(arr[i])
+        
+    return leaders
+
+# print(arr_leader(arr))
+
+# Optimal Approach 
+def optimal_arr_leader(arr):
+    ans = []
+    maxi = float('-inf')
+    for i in range(len(arr)-1, -1, -1):
+        print(arr[i])
+        if maxi < arr[i]:
+            ans.append(arr[i])
+            
+        maxi = max(maxi,arr[i])
+        print("maxi:",maxi)
+
+    return ans
+
+print(optimal_arr_leader(arr))
