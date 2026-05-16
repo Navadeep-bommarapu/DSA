@@ -1,4 +1,4 @@
-arr = list(map(int, input("Enter array element: ").split())) or [2,6,5,11,8,11]
+arr = list(map(int, input("Enter array element: ").split())) or [3,1,-2,-5,2,-4]
 
 # Two Sum
 # Brute Approach - looping through the array and checking for the summation to the target number
@@ -49,7 +49,6 @@ def optimal_twoSum(arr, target):
 
 # Sort an Array of 0's, 1's and 2's
 # Brute Approach - using any of the sorting algorithms
-arr = [1,2,1,0,0,1,2,0,1]
 low = 0
 high = len(arr) - 1
 
@@ -96,7 +95,6 @@ def sort_arr(arr, low, high):
 # print(sort_arr(arr, low, high))
 
 # Better Approach - counting the 0's, 1's and 2's in the arr and store in place of the count0, count1, count2
-arr = [1,2,1,0,0,1,2,0,1]
 def better_sort_arr(arr):
     count0 = 0
     count1 = 0
@@ -129,7 +127,6 @@ def better_sort_arr(arr):
 # 2. range(low, mid - 1) - everything is 1 (sorted)
 # range(mid, high) - unsorted array
 # 3. range(high + 1, len(arr) - 1) - everything is 2 (sorted)
-arr = [1,2,1,0,0,1,2,0,1]
 def optimal_sort_arr(arr):
     low = 0
     mid = 0
@@ -153,7 +150,6 @@ def optimal_sort_arr(arr):
 
 # Majority Element in Array
 # Brute Approach - iterating through the array and check the element count is greater than the lenght of array by 2
-arr = [6,5,5]
 def majority_element(arr):
     n = len(arr)
     for i in arr:
@@ -182,7 +178,7 @@ def better_majority_element(arr):
         else:
             hash_map[arr[i]] = 1
     
-    print(hash_map)
+    # print(hash_map)
     max = 0
     maxelement = 0
     for element, value in hash_map.items():
@@ -196,7 +192,6 @@ def better_majority_element(arr):
 
 
 # Optimal Approach - Moore's Voting Algorithm
-arr = [7,7,5,7,5,1,5,7,5,5,7,7,5,5,5,5]
 def optimal_majority_element(arr):
     maj_element = arr[0]
     count = 0
@@ -214,16 +209,214 @@ def optimal_majority_element(arr):
         
     return maj_element
 
-print(optimal_majority_element(arr))
+# print(optimal_majority_element(arr))
+
+# Maximum Subarray sum in an array
+# Brute Approach
+def max_subarray_sum(arr):
+    max = 0
+    for i in range(len(arr)):
+        for j in range(i,len(arr)):
+            sum = 0
+            for k in arr:
+                sum += k
+                if sum > max:
+                    max = sum
+    
+    return max
+
+# print(max_subarray_sum(arr))
+
+# Better Approach
+def better_max_subarray_sum(arr):
+    
+    max = arr[0]
+    
+    for i in range(len(arr)):
+        sum =0
+        for j in range(i,len(arr)):
+            sum += arr[j]
+           
+            if sum > max:
+               max = sum
+        
+    return max
+            
+
+# print(better_max_subarray_sum(arr))
 
 
+# Optimal Approach - Kadane's Algorithm
+def optimal_max_subarray_sum(arr):
+    
+    sum = 0
+    max = arr[0]
+    
+    for i in range(len(arr)):
+        sum += arr[i]
+        
+        if sum > max:
+            max = sum
+        
+        if sum < 0:
+            sum = 0
+            
+    return max
+
+# print(optimal_max_subarray_sum(arr))
 
 
+# Printing Subarray with max subarray sum
+def print_subarray_max_sum(arr):
+    sum = 0
+    max = float('-inf')
+    ansStart = -1
+    ansEnd = -1
+    
+    for i in range(len(arr)):
+        if sum == 0:
+            start = i
+            
+        sum += arr[i]
+        
+        if sum < 0: 
+            sum = 0
+        
+            
+        if sum > max:
+            max = sum
+            ansStart = start
+            ansEnd = i
+        
+            
+    temp = []
+    for i in range(ansStart,ansEnd+1):
+        temp.append(arr[i])
+    
+    return temp
+
+# print(print_subarray_max_sum(arr))
+
+# Stock Buy and Sell
+# Brute Approach
+def buy_sell_stocks(arr):
+    profit = 0
+    for i in range(len(arr)):
+        buy = arr[i]
+        for j in range(i+1,len(arr)):
+            sell = arr[j]
+            
+            if buy < sell and sell - buy > profit:
+                profit = sell - buy
+                print("buy:",buy,"sell:",sell,"profit:",profit, end="\n")
+            # print("buy and sell:", sell-buy, "profit:",profit,end="\n\n")
+    return profit
+
+# print(buy_sell_stocks(arr))                
+
+# Optimal Approach
+def optimal_buy_sell_stocks(arr):
+    profit = 0
+    mini = arr[0]
+    
+    for i in range(1,len(arr)):
+        cost = arr[i] - mini # sell - buy
+        profit = max(profit, cost)
+        mini = min(mini, arr[i])
+                
+    return profit
+
+# print(optimal_buy_sell_stocks(arr))
+
+# Rearrange array elements by sign - having same number of positive and negative elements in the array
+# Brute Approach - my thinking
+def rearrange_element_bysign(arr):
+    positive = []
+    negative = []
+    for i in arr:
+        if i >= 0:
+            positive.append(i)
+        else:
+            negative.append(i)
+        
+    print(positive, negative)
+    # pos = 0
+    # neg = 0
+    # for i in range(len(arr)):
+    #     if i == 0 or i % 2 == 0:
+    #         arr[i] = positive[pos]
+    #         pos += 1
+    #         print(arr[i])
+    #     else:
+    #         arr[i] = negative[neg]
+    #         neg += 1
+    
+    for i in range(len(arr)//2):
+        arr[2*i] = positive[i]
+        arr[2*i+1] = negative[i]
+    
+    return arr
+
+# print(rearrange_element_bysign(arr))
+        
+# Optimal Approach - taking new array and having 2 pointers (pos, neg), 
+#                    the pointers point to the new array on the old and even index, 
+#           the even index contains the positive element and odd index contains the negative element from the original array
+def optimal_rearrange_element_bysign(arr):
+    ans = [0] * len(arr)
+    pos = 0
+    neg = 1
+    
+    for i in range(len(arr)):
+        if arr[i] < 0:
+            ans[neg] = arr[i]
+            neg += 2
+        else:
+            ans[pos] = arr[i]
+            pos += 2
+    
+    return ans
+
+# print(optimal_rearrange_element_bysign(arr))
 
 
-
-
-
+# Rearrange array elements by sign - not having the same number of positive and negative elements in the array
+def sec_variate_rearrange_element_bysign(arr):
+    pos = []
+    neg = []
+    ans = [0] * len(arr)
+    for i in arr:
+        if i >= 0:
+            pos.append(i)
+        else:
+            neg.append(i)
+        
+    if len(pos) > len(neg):
+        for i in range(len(neg)):
+            ans[2*i] = pos[i]
+            ans[2*i+1] = neg[i]
+        
+        index = 2 * len(neg)
+        for i in range(len(neg), len(pos)):
+            ans[index] = pos[i]
+            index += 1
+    else:
+        for i in range(len(pos)):
+            ans[2*i] = pos[i]
+            ans[2*i+1] = neg[i]
+            
+        index = 2 * len(pos)
+        
+        for i in range(len(pos), len(neg)):
+            ans[index] = neg[i]
+            index += 1
+    
+    return ans
+        
+print(sec_variate_rearrange_element_bysign(arr))
+            
+            
+    
 
 
 
