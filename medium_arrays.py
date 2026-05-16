@@ -502,7 +502,11 @@ def arr_leader(arr):
 
 # print(arr_leader(arr))
 
-# Optimal Approach 
+# Optimal Approach - iterating through the array and comparing the element with the 
+#                    max of the elements in the right, and storing in the new array
+# [10,22,12,3,0,6] - looping from the end and checking the element is greater than the max and 
+#                    representing with max and appending into the elemnet
+# [6,12,22] - reverse the arr -> [22,12,6]
 def optimal_arr_leader(arr):
     ans = []
     maxi = float('-inf')
@@ -516,4 +520,8 @@ def optimal_arr_leader(arr):
 
     return ans
 
-print(optimal_arr_leader(arr))
+# print(optimal_arr_leader(arr))
+
+
+
+
