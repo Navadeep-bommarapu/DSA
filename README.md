@@ -5,6 +5,12 @@ Each file includes solutions to problems solved using Python
 
 Leetcode Problems Solved: 66 (55 easy, 10 medium, 1 hard)
 
+## Goals
+- Strengthen problem-solving skills
+- Prepare for coding interviews
+- Improve optimization techniques
+- Build consistency in DSA practice
+
 ### Resources:
 - Striver Sheet
 - Doubts clarification AI LLMs
