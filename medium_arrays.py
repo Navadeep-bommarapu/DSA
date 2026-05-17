@@ -1,4 +1,4 @@
-arr = list(map(int, input("Enter array element: ").split())) or [10,22,12,3,0,6]
+arr = list(map(int, input("Enter array element: ").split())) or [100,102,100,101,101,4,3,2,3,2,1,1,1,2]
 
 # Two Sum
 # Brute Approach - looping through the array and checking for the summation to the target number
@@ -454,31 +454,6 @@ def next_permutation(arr):
     return arr
 
 # print(next_permutation(arr))
-        
-def next_permutation_practice(arr):
-    index = -1
-    for i in range(len(arr)-2, -1, -1):
-        if arr[i] < arr[i+1]:
-            index = i
-            break
-    
-    if index == -1:
-        arr.reverse()
-        return arr
-
-    for i in range(len(arr)-1, index, -1):
-        if arr[i] > arr[index]:
-            arr[i], arr[index] = arr[index], arr[i]
-            break
-    
-    for i in range(index+1, len(arr)):
-        for j in range(i+1):
-            if arr[j] < arr[i]:
-                arr[j], arr[i] = arr[i], arr[j]
-            
-    return arr
-
-# print(next_permutation_practice(arr))
 
 # Leader in an Array:
 # Brute Approach - looping through the array and checking if the element is greater 
@@ -523,5 +498,75 @@ def optimal_arr_leader(arr):
 # print(optimal_arr_leader(arr))
 
 
+# Longest Consecutive Sequence
+# Brute Approach - [102,4,100,101,1,3,2,1,1] this arr having the subsequences [100,101,102], [1,2,3,4] 
+#                  the longest among these sequence is [1,2,3,4], returns the length of the longest subsequence
+def linear_search(arr, num):
+    for i in range(len(arr)):
+        if arr[i] == num:
+            return True
+    
+    return False
+
+def longest_consecutive_sequence(arr):
+    longest = 1
+    for i in arr:
+        x = i
+        count = 1
+        for j in arr:
+            while linear_search(arr,x+1):
+                x += 1
+                count += 1
+                
+        longest = count 
+        
+    return longest
+
+# print(longest_consecutive_sequence(arr))
+
+# Better Approach - Sorting the array and looping through and checking if 
+#                   the element is same as the lastsmaller and tracking the count
+def better_longest_consecutive_sequence(arr):
+    
+    for i in range(len(arr)):
+        for j in range(i):
+            if arr[j] > arr[i]:
+                arr[j], arr[i] = arr[i], arr[j]
+            
+    print(arr)
+    countCurr = 0
+    lastSmaller = float('inf')
+    longest = 1
+    
+    for i in range(len(arr)):
+        if arr[i] - 1 == lastSmaller:
+            countCurr += 1
+            lastSmaller = arr[i]
+            
+        elif arr[i] != lastSmaller:
+            lastSmaller = arr[i]
+            countCurr = 1
+        
+        longest  = max(longest, countCurr)
+    return longest
+
+# print(better_longest_consecutive_sequence(arr))
+
+# Optimal Approach
+def optimal_longest_consecutive_sequence(arr):
+    num_set = set(arr)
+    longest = 0
+    for num in num_set:
+        if num - 1 not in num_set:
+            count = 1
+            while num + 1 in num_set:
+                num += 1
+                count += 1
+            
+            longest = max(longest, count)
+        
+    return longest
+
+print(optimal_longest_consecutive_sequence(arr))
 
 
