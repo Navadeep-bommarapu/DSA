@@ -567,6 +567,36 @@ def optimal_longest_consecutive_sequence(arr):
         
     return longest
 
-print(optimal_longest_consecutive_sequence(arr))
+# print(optimal_longest_consecutive_sequence(arr))
+
+# Set Matrix Zero
+matrix = [[1,1,1,1],[1,0,0,1],[1,1,0,1],[1,1,1,1]]
+
+def markRow(i):
+    for j in range(len(matrix[i])):
+        if matrix[i][j] != 0:
+            matrix[i][j] = -1
+            
+def markCol(j):
+    for i in range(len(matrix[j])):
+        if matrix[i][j] != 0:
+            matrix[i][j] = -1
+    
+    
+def set_matrix_zero(matrix):
+    for i in range(len(matrix)):
+        for j in range(len(matrix)):
+            if matrix[i][j] == 0:
+                markRow(i)
+                markCol(j)
+                
+                
+    for i in range(len(matrix)):
+        for j in range(len(matrix)):
+            if matrix[i][j] == -1:
+                matrix[i][j] = 0
+    return matrix
+
+print(set_matrix_zero(matrix))
 
 
